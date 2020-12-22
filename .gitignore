@@ -12,7 +12,7 @@ target/
 .idea/
 *.iml
 
-# IDEA
+# IDEA .
 *.iml
 *.ipr
 *.iws
