@@ -2,6 +2,6 @@ package com.zou.zyqblogs.config;
 
 public class hello {
     public static void main(String[] args) {
-        System.out.println("sout1");
+        System.out.println("soutdasd");
     }
 }
