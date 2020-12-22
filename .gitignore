@@ -3,14 +3,13 @@
 *.lock
 target/
 
-# package files
+# package files .
 *.jar
 *.war
 *.ear
 
 # idea
 .idea/
-*.iml
 
 *.iws
 /.idea
