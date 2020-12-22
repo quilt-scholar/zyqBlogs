@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{../layui/css/layui.css}">
+</head>
+<body style="padding: 20px;">
+
+    <div class="layui-form">
+        <input type="hidden" th:value="${comment_id}" name="ids" />
+        <div class="layui-form-item layui-form-text">
+            <h2>回复内容:</h2>
+            <div>
+                <textarea placeholder="请输入内容" class="layui-textarea" name="reply_body"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button style="float: right;" class="layui-btn" lay-submit lay-filter="sub">回复</button>
+        </div>
+    </div>
+
+    <script th:src="@{../layui/layui.js}"></script>
+    <script th:src="@{../js/jq.js}"></script>
+
+    <script>
+        //JavaScript代码区域
+        layui.use(['element','layer', 'form'], function() {
+            var form=layui.form;
+            var element=layui.element;
+            var layer=layui.layer;
+
+            form.on("submit(sub)",function(data){
+                console.log(data.field);
+                $.ajax({
+                    url:"reply",
+                    type:"post",
+                    data:data.field,
+                    success:function (data){
+                        if(!data.code>0){
+                            layer.alert("添加成功");
+                        }else{
+                            layer.alert("添加失败");
+                        }
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layui.table.reload('comment');
+                        parent.layer.close(index);
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

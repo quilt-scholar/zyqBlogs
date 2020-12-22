@@ -1,0 +1,80 @@
+.blogs-center .center-body{
+    padding: 30px 25px;
+}
+.blogs-center .center-body h1{
+    font-weight: normal;
+    color: #555;
+    margin-bottom: 15px;
+}
+.blogs-center .center-body>ul{}
+.blogs-center .center-body>ul li{
+    float: left;
+    border-right: 1px solid #e5e5e5;
+    padding: 0 10px;
+}
+.blogs-center .center-body>ul li:first-child{
+    padding-left: 0;
+}
+.blogs-center .center-body>ul li:last-child{
+    border: none;
+    padding-right: 0;
+}
+.blogs-center .center-body hr{
+    margin: 30px 0;
+    width: 100px;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.blogs-comment{
+    margin-top: 30px;
+}
+.comment-title{
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    color: #888;
+    margin: 20px 0;
+}
+.blogs-comment .comment-content,.blogs-comment .comment-image{
+    float: left;
+}
+.blogs-comment .comment-content{
+    height: 110px;
+}
+.blogs-comment .comment-image{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right:10px ;
+}
+.blogs-comment .comment-image img{
+    width:100%;
+    height:100%;
+}
+.blogs-comment .comment-content p{
+    font-size: 12px;
+}
+.blogs-comment .comment-content p span{
+    margin-right: 10px;
+}
+.blogs-comment .comment-content .comment-body{
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+.blogs-comment .comment-content .comment-body{
+    width: 620px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+.blogs-comment li{
+    margin-top:20px ;
+}
+.blogs-comment .comment-reply{
+    margin-left: 10px;
+}
+.comment-form{
+    /*margin:20px 0;*/
+}

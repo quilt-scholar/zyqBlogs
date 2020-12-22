@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>后台控制器</title>
+        <link rel="stylesheet" th:href="@{layui/css/layui.css}">
+        <style rel="stylesheet">
+            .clear:after,.clear:before{
+                height: 0;
+                content: ".";
+                display: block;
+                overflow: hidden;
+                clear: both;
+            }
+            .console-a {
+                display: block;
+            }
+            .console-card-text {
+                float: left;
+                width: 120px;
+            }
+            .console-card-text h1{
+                font-size: 30px;
+                line-height: 45px;
+            }
+            .console-card-icon{
+                float: left;
+                margin: 30px 0 0 165px;
+            }
+            .console-card-icon i{
+                font-size: 100px;
+            }
+            .lets-go{
+                background: #555;
+                opacity: 0.5;
+                text-align: center;
+                padding:5px 0;
+            }
+            .lets-go{
+                display: none;
+            }
+
+            #statement>div{
+                float: left;
+            }
+        </style>
+    </head>
+    <body class="layui-layout-body">
+        <div class="layui-layout layui-layout-admin">
+            <!--头部到导航栏组件-->
+            <div th:replace="~{afterEnd/component/component::top}"></div>
+            <!--侧边导航栏组件-->
+            <div th:replace="~{afterEnd/component/component::left(active='main')}"></div>
+
+            <div class="layui-body">
+                <div style="padding: 20px;">
+                    <h2 style="color: #393D49;">管理首页</h2>
+                    <hr class="layui-bg-gray" />
+                    <div class="layui-row layui-col-space15">
+                        <!--使用layui栅格布局，使用卡片修改其样式，完成页面效果-->
+                        <div class="layui-col-md4">
+                            <a href="/addBlog.html" class="console-a">
+                                <div class="layui-card layui-bg-blue" style="height: 149px;">
+                                    <div class="layui-card-body">
+                                        <div class="clear">
+                                            <div class="console-card-text">
+                                                <h1>新增博客</h1>
+                                                <p>记心中想</p>
+                                            </div>
+                                            <div class="console-card-icon">
+                                                <i class="layui-icon layui-icon-edit"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lets-go">
+                                        lets' go &nbsp; <i class="layui-icon layui-icon-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="layui-col-md4">
+                            <a href="/comment.html" class="console-a">
+                                <div class="layui-card layui-bg-green" style="height: 149px;">
+                                    <div class="layui-card-body">
+                                        <div class="clear">
+                                            <div class="console-card-text">
+                                                <h1 id="commentNum">0</h1>
+                                                <p>收到评论数</p>
+                                            </div>
+                                            <div class="console-card-icon">
+                                                <i class="layui-icon layui-icon-dialogue"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lets-go">
+                                        lets' go &nbsp; <i class="layui-icon layui-icon-right"></i>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+
+                        <div class="layui-col-md4">
+                            <a href="/blog.html" class="console-a">
+                                <div class="layui-card layui-bg-orange" style="height: 149px;">
+                                    <div class="layui-card-body">
+                                        <div class="clear">
+                                            <div class="console-card-text">
+                                                <h1 id="blogNum">0</h1>
+                                                <p>总文章数</p>
+                                            </div>
+                                            <div class="console-card-icon">
+                                                <i class="layui-icon layui-icon-read"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lets-go">
+                                        lets' go &nbsp; <i class="layui-icon layui-icon-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+<!--                    </div>-->
+<!--                    <div class="layui-row layui-col-space15">-->
+                        <div class="layui-col-md4">
+                            <a href="/category.html" class="console-a">
+                                <div class="layui-card layui-bg-cyan" style="height: 149px;">
+                                    <div class="layui-card-body">
+                                        <div class="clear">
+                                            <div class="console-card-text">
+                                                <h1 id="categoryNum">0</h1>
+                                                <p>分类数量</p>
+                                            </div>
+                                            <div class="console-card-icon">
+                                                <i class="layui-icon layui-icon-list"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lets-go">
+                                        lets' go &nbsp; <i class="layui-icon layui-icon-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="layui-col-md4">
+                            <a href="/tag.html" class="console-a">
+                                <div class="layui-card layui-bg-red" style="height: 149px;">
+                                    <div class="layui-card-body">
+                                        <div class="clear">
+                                            <div class="console-card-text">
+                                                <h1 id="tagNum">0</h1>
+                                                <p>标签总量</p>
+                                            </div>
+                                            <div class="console-card-icon">
+                                                <i class="layui-icon layui-icon-note"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lets-go">
+                                        lets' go &nbsp; <i class="layui-icon layui-icon-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="layui-col-md4">
+                            <a href="/link.html" class="console-a">
+                                <div class="layui-card layui-bg-purple" style="height: 149px;">
+                                    <div class="layui-card-body">
+                                        <div class="clear">
+                                            <div class="console-card-text">
+                                                <h1 id="linkNum">0</h1>
+                                                <p>友链数量</p>
+                                            </div>
+                                            <div class="console-card-icon">
+                                                <i class="layui-icon layui-icon-link"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lets-go">
+                                        lets' go &nbsp; <i class="layui-icon layui-icon-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <h2 style="color: #393D49; margin-top:20px;">统计报表</h2>
+                    <hr class="layui-bg-gray" />
+                    <div id="statement" class="layui-row layui-col-space15 clear">
+                        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                        <div id="histogram" style="width:400px;height:400px; margin: 0 auto;"></div>
+
+                        <div id="lineChart" style="width: 400px;height:400px; margin: 0 auto;"></div>
+
+                        <div id="pieChart" style="width: 400px;height:400px; margin: 0 auto;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script th:src="@{layui/layui.js}"></script>
+        <script th:src="@{js/jq.js}"></script>
+        <script th:src="@{js/echarts.min.js}"></script>
+
+        <script>
+            $(function () {
+                //柱状图 排前10的访问量
+                var histogram = echarts.init(document.getElementById('histogram'));
+                $.ajax({
+                    url:"/top10",
+                    type:"post",
+                    success: function(data){
+                        if (!data.code>0) {
+                            histogram.setOption({
+                                //表的标题
+                                title:　{
+                                    text: "博文访问量TOP10"
+                                },
+                                //配置提示信息：鼠标悬停到某个柱子，柱子会弹出它的具体信息
+                                tooltip: {},
+                                //图例：展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
+                                legend: {
+                                    top:"6%",
+                                    data: [{
+                                        //图列的名称
+                                        name: '游览量',
+                                        // 强制设置图形为圆。
+                                        icon: 'circle',
+                                        // 设置文本为红色
+                                        textStyle: {
+                                            color: 'red'
+                                        }
+                                    }]
+                                },
+                                //柱状图/折线图，需要设置xy轴
+                                xAxis: {
+                                    data: data.obj.map(function(req){
+                                        return req.blog_title;
+                                    }),
+                                    axisLabel: {
+                                        interval:0,
+                                        rotate:40,
+                                        // fontSize: 8
+                                    }
+                                },
+                                yAxis: {},//y轴可以不配置内容，只要有数据有轴会自动分配
+                                //系列列表：每个系列通过 type 决定自己的图表类型:
+                                series: [{
+                                    name: "游览量", // 系列名称 , 与图裂名称对应，实现图裂的功能
+                                    type: 'bar',  // 系列图表类型
+                                    data: data.obj.map(function(req){
+                                        return req.blog_views;
+                                    }) // 系列中的数据内容，与x轴data个数对应
+                                }]
+                            });
+                        }
+                    }
+                })
+
+                //折线图 近一个月的访问量
+                var lineChart  = echarts.init(document.getElementById('lineChart'));
+                $.ajax({
+                    url:"/websiteVisits",
+                    type:"post",
+                    success: function(data){
+                        if (!data.code>0) {
+                            var datas=[];//创建一个数组
+                            datas[0]=['product',"访问量"];//添加图例信息
+                            data.obj.map(function (row) {//通过map()将返回的data转为数组形式添加到datas
+                                datas.push([row.weeks,row.count]);
+                            })
+                            lineChart.setOption({
+                                //表的标题
+                                title:　{
+                                    text: "近一个月每周的访问量"
+                                },
+                                //配置提示信息：鼠标悬停到某个柱子，柱子会弹出它的具体信息
+                                tooltip: {},
+                                //图例：展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
+                                legend: {
+                                    top:"6%"
+                                },
+                                //数据集dataset 组件用于单独的数据集声明，从而数据可以单独管理，被多个组件复用，并且可以基于数据指定数据到视觉的映射。
+                                dataset: {
+                                    // 提供一份数据。
+                                    source:datas
+                                },
+                                // 声明一个 X 轴，类目轴（category）。默认情况下，类目轴对应到 dataset 第一列。
+                                xAxis: {
+                                    type: 'category'
+                                },
+                                yAxis: {},//y轴可以不配置内容，只要有数据有轴会自动分配
+                                //可以声明多个 bar 系列，默认情况下，每个系列会自动对应到 dataset 的每一列。
+                                series: [{type: 'line'}]// 系列图表类型
+                            });
+                        }
+                    }
+                })
+
+                //饼状图 博客分类的博客数
+                var pieChart = echarts.init(document.getElementById('pieChart'));
+                $.ajax({
+                    url:"/categoryNum",
+                    type:"post",
+                    success: function(data){
+                        if (!data.code>0) {
+                            pieChart.setOption({
+                                //表的标题
+                                title:　{
+                                    text: "博客分类拥有的博文数量"
+                                },
+                                //配置提示信息：鼠标悬停到某个柱子，柱子会弹出它的具体信息
+                                tooltip: {},
+                                //图例：展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
+                                legend: {
+                                    top:"6%"
+                                },
+                                //柱状图/折线图，需要设置xy轴
+                                xAxis: {
+                                    data: data.obj.map(function(req){
+                                        return req.category_name;
+                                    })
+                                },
+                                yAxis: {},//y轴可以不配置内容，只要有数据有轴会自动分配
+                                //系列列表：每个系列通过 type 决定自己的图表类型:
+                                series: [{
+                                    name: "博文数", // 系列名称 , 与图裂名称对应，实现图裂的功能
+                                    type: 'pie',  // 系列图表类型
+                                    radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                                    avoidLabelOverlap: true,   //是否启用防止标签重叠策略
+                                    data: data.obj.map(function(req){
+                                        return {name:req.category_name,value:req.num};
+                                    }) // 系列中的数据内容，与x轴data个数对应
+                                }]
+
+                            });
+                        }
+                    }
+                })
+
+                //JavaScript代码区域
+                layui.use(['element', 'layer'], function() {
+                    var element = layui.element; //需要加载element模块，渲染页面，否则有些效果将不会出现
+                    var layer = layui.layer; //这是layui的layer用于使用弹窗
+                    //进入该页面，就会发送一个获取管理模块中所有表中的数据数
+                    $.ajax({
+                        url:"/getNums",
+                        type:"post",
+                        success:function (data) {
+                            if(!data.code>0){
+                                $("#blogNum").text(data.obj.blognum);
+                                $("#commentNum").text(data.obj.commentnum);
+                                $("#categoryNum").text(data.obj.categorynum);
+                                $("#linkNum").text(data.obj.linknum);
+                                $("#tagNum").text(data.obj.tagnum);
+                            }
+                        }
+                    });
+                });
+                //鼠标悬停在卡片上，显示lets-go中的元素
+                $(".layui-col-md4").siblings().mousemove(function(){
+                    $(this).find(".lets-go").show();
+                });
+                $(".layui-col-md4").siblings().mouseout(function(){
+                    $(this).find(".lets-go").hide();
+                });
+            })
+        </script>
+    </body>
+</html>

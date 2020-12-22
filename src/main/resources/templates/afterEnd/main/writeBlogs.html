@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{editor/css/editormd.css}"/>
+    <style>
+        #tagList{
+            width:820px;
+        }
+        .scrollbar{
+            height:100px;
+            overflow: auto;
+        }
+        .scrollbar::-webkit-scrollbar {/*滚动条整体样式*/
+            width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+            height: 1px;
+        }
+        .scrollbar::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+            border-radius: 10px;
+            background: #dfdfdf;
+            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        }
+        .layui-input-block {
+            margin-left: 86px;
+        }
+        .layui-form-label {
+            width: auto;
+            text-align: left;
+        }
+    </style>
+</head>
+
+    <body class="layui-layout-body">
+        <div class="layui-layout layui-layout-admin">
+            <div th:replace="~{afterEnd/component/component::top}"></div>
+
+            <div th:replace="~{afterEnd/component/component::left(active='addBlog')}"></div>
+
+            <div class="layui-body">
+                <div style="padding: 20px;">
+                    <h2 style="color: #393D49;">发布文章</h2>
+                    <hr class="layui-bg-gray" />
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">文章标题</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="blog_title" required  lay-verify="required" placeholder="请输入文章标题" autocomplete="off" class="layui-input">
+                            </div>
+                            <label class="layui-form-label">文章分类</label>
+                            <div class="layui-input-inline">
+                                <select name="blog_category_name" lay-verify="required">
+                                    <option value=""></option>
+                                    <!--循环遍历查询出来的分类-->
+                                    <option th:each="m:${categoryList}" th:text="${m.get('category_name')}" th:value="${m.get('category_id')}+','+${m.get('category_name')}">北京</option>
+                                </select>
+                            </div>
+
+                            <label class="layui-form-label">文章描述</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="blog_description"  placeholder="请该文章描述" autocomplete="off" class="layui-input">
+                            </div>
+
+                            <label class="layui-form-label">文章自定义URL</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="blog_sub_url" required  lay-verify="required" placeholder="请输入自定义URL" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">文章标签</label>
+                            <div class="layui-input-block" id="tagList">
+                                <!--循环遍历查询出来的标签-->
+                                <input type="checkbox" name="blog_tags" th:title="${tag.get('tag_name')}" th:value="${tag.get('tag_name')}" lay-skin="primary" th:each="tag:${tagList}"  />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">文章内容</label>
+                            <div class="layui-input-block">
+                                <div id="editor">
+                                    <textarea name="blog_content" style="display:none;">>注意添加图片，第一张即为博文的封面图</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div style="margin-left: 1051px;">
+                            <button type="button" class="layui-btn">返回文章列表</button>
+                            <button type="button" class="layui-btn layui-btn-primary" lay-submit lay-filter="sub">保存文章</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script th:src="@{layui/layui.js}"></script>
+        <script th:src="@{js/jq.js}"></script>
+
+        <script th:src="@{editor/editormd.js}"></script>
+
+        <script type="text/javascript">
+            var testEditor;
+
+            $(function() {
+                //判断标签的高度是否大于100，如果大于100给它加一个滚动条
+                if($("#tagList").outerHeight()>100){
+                    $(this).addClass("scrollbar");
+                }
+
+                testEditor = editormd("editor", {//渲染富文本
+                    width : "99.5%",
+                    height : 500,
+                    syncScrolling : "single", //实现编辑与预览同步滚动
+                    path : "editor/lib/", //加载富文本需要的模块路径
+                    saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
+                    theme: "",//工具栏主题
+                    previewTheme: "",//预览主题
+                    editorTheme: "default",//编辑主题
+                    tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+                    flowChart : true,             // 开启流程图支持，默认关闭
+                    sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
+                    //图片上传
+                    imageUpload : true, //开启图片上传功能
+                    imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"], //允许上传图片的格式
+                    imageUploadURL : "/article/upload", //图片上传的请求路径
+                    onload : function() {//页面加载将this信息输出在控制台
+                        console.log('onload', this);
+                    },
+                    /*指定需要显示的功能按钮*/
+                    toolbarIcons : function() {
+                        return ["undo","redo","|",
+                            "bold","del","italic","quote","ucwords","uppercase","lowercase","|",
+                            "h1","h2","h3","h4","h5","h6","|",
+                            "list-ul","list-ol","hr","|",
+                            "link","reference-link","image","code","preformatted-text",
+                            "code-block","table","datetime","emoji","html-entities","pagebreak","|",
+                            "goto-line","watch","preview","fullscreen","clear","search","|",
+                            "help","info","releaseIcon", "index"]
+                    },
+                });
+
+                //JavaScript代码区域
+                layui.use(['form','element','layer'], function() {
+                    var element = layui.element;
+                    var from = layui.form; //加载form模块，会渲染下拉列表和复选框，还用于提交，监听等
+                    var layer=layui.layer;
+                    //监听提交事件，如果点击了lay-filter为sub的按钮，就会被监听
+                    from.on('submit(sub)', function(data){
+                        //因为layui获取的tag元素只有最后选择的那一个
+                        //所以需要获取已选中的tag元素，遍历它，将元素中的val赋到tag中
+                        var tag ="";
+                        $('input[name="blog_tags"]:checked').each(function(index, domEle){
+                            tag+=$(this).val()+",";
+                        });
+                        tag=tag.substring(0,tag.length-1);
+                        data.field.blog_tags=tag;//将获取到的tag赋给data.field中的blog_tags属性中
+                        console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+                        $.ajax({
+                            url:"/addBlog",
+                            type:"post",
+                            traditional: true, //该属性用于开启数组参数传递
+                            data:data.field,
+                            success:function (data){
+                                if(!data.code>0){
+                                    layer.alert("添加成功");
+                                    $('.layui-form')[0].reset();
+                                }else{
+                                    layer.alert("添加失败，原因："+data.msg);
+                                }
+                                testEditor.setMarkdown(">注意添加图片，第一张即为博文的封面图");
+                            }
+                        });
+                        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

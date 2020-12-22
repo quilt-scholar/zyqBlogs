@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zou.zyqblogs.mapper.GeneralMapper">
+    <!--查询表中数据的数量，取出传递的map中的表名，并遍历里面需要判断的条件数据-->
+    <select id="finallObjectNum" parameterType="map" resultType="int">
+        select count(1) from ${maps.tableName}
+        <where>
+            <foreach collection="maps" index="key" item="val">
+                <if test="val!=null and val!='' and key!='tableName'">
+                    and ${key}=#{val}
+                </if>
+            </foreach>
+        </where>
+    </select>
+
+    <!--查询表中数据-->
+    <select id="finallObjects" parameterType="map" resultType="map">
+        select * from ${maps.tableName}
+        <where>
+            <foreach collection="maps" index="key" item="val">
+                <if test="val!=null and val!='' and key!='tableName' and key!='like'">
+                    and ${key}=#{val}
+                </if>
+                <if test="key=='like'">
+                    <foreach collection="maps.like" index="key" item="val">
+                        and ${key} like "%"#{val}"%"
+                    </foreach>
+                </if>
+            </foreach>
+
+        </where>
+    </select>
+    <!--根据id查询表中数据-->
+    <select id="finallObjectById" parameterType="map" resultType="map">
+        select * from ${maps.tableName}
+        <where>
+            <foreach collection="maps" index="key" item="val">
+                <if test="val!=null and val!='' and key!='tableName'">
+                    and ${key}=#{val}
+                </if>
+            </foreach>
+        </where>
+    </select>
+    <!--根据字段批量查询表中数据-->
+    <select id="finallObjectByFields" parameterType="map" resultType="map">
+        select * from ${tableName}
+        <where>
+            ${tableField}
+            in
+            <foreach collection="fields" item="field" open="(" separator="," close=")">
+                #{field}
+            </foreach>
+        </where>
+    </select>
+
+    <!--为表添加数据，将传递过来的map分为key、val集合，分别遍历即可-->
+    <insert id="addObjects" parameterType="map">
+        insert into ${tableName}
+        <foreach collection="keys" item="key" open="(" separator="," close=")">
+            ${key}
+        </foreach>
+        values
+        <foreach collection="values" item="val" open="(" separator="," close=")">
+            #{val}
+        </foreach>
+    </insert>
+
+    <!--批量删除，取出传递的map中的表名、表ID名，并遍历里面需要判断的ids数组-->
+    <delete id="delObjects" parameterType="map">
+        delete from ${tableName}
+        <where>
+            ${tableId}
+             in
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+
+    <!--删除-->
+    <delete id="delObject" parameterType="map">
+        delete from ${maps.tableName}
+        <where>
+            <foreach collection="maps" index="key" item="val">
+                <if test="val!=null and val!='' and key!='tableName'">
+                    and ${key}=#{val}
+                </if>
+            </foreach>
+        </where>
+    </delete>
+
+    <!--修改-->
+<!--    <update id="updObject" parameterType="map">-->
+<!--        update ${maps.tableName}-->
+<!--        <set>-->
+<!--            <foreach collection="maps" index="key" item="val">-->
+<!--                <if test="val!=null and val!='' and key!='tableName'">-->
+<!--                    ${key}=#{val},-->
+<!--                </if>-->
+<!--            </foreach>-->
+<!--        </set>-->
+<!--        <where>-->
+<!--            ${maps.tableId}=#{val}-->
+<!--        </where>-->
+
+<!--    </update>-->
+
+</mapper>

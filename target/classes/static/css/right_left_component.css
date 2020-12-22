@@ -1,0 +1,172 @@
+*{
+    margin:0;
+    padding:0;
+}
+a{
+    text-decoration: none;
+    color: #333;
+}
+ul{
+    list-style:none;
+}
+input{
+    /*去除表单选中时的篮框*/
+    outline:none;
+}
+.clear:after{
+    content:".";
+    height: 0;
+    overflow:hidden;
+    display:block;
+    clear:both;
+}
+.clear{
+    zoom: 1;
+}
+
+body{
+    background:#f1f2f9;
+}
+.blogs-main{
+    max-width:1200px;
+    margin:25px auto;
+}
+.blogs-fixed-0{
+    width:15%;
+    height:261px;
+}
+.blogs-fixed-1{
+    width:61%;
+}
+.blogs-fixed-2{
+    width:20%;
+}
+/*.blogs-fixed-0,.blogs-fixed-2{*/
+/*    height:100%;*/
+/*}*/
+.blogs-fixed-0,.blogs-fixed-1,.blogs-fixed-2 {
+    /*position: relative;*/
+    margin-left: 15px;
+    box-sizing: border-box;
+    float: left;
+}
+.blogs-left{
+    width: 180px;
+}
+.blogs-right{
+    width: 240px;
+}
+.blogs-center{
+    width: 100%;
+}
+.blogs-left,.blogs-right{
+    position: fixed;
+}
+.shadow{/*设置阴影*/
+    background:#fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0,0,0,0.1);
+}
+
+.x-title{
+    padding: 15px 20px;
+    font-size: 1rem;
+    color: #888;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+}
+
+
+
+.left-head{
+    padding:25px 0;
+}
+.left-head .portrait{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 10px auto;
+}
+.left-head .portrait img{
+    width: 100%;
+    height: 100%;
+    margin:0 auto;
+}
+.left-head .headline{
+    text-align: center;
+}
+.left-head .headline h3{
+    font-size: 18px;
+    color:#333;
+    font-weight: normal;
+}
+.left-head .headline p{
+    font-size: 12px;
+    padding: 10px 0;
+    color: #999;
+}
+.blogs-left input{
+    width:100%;
+    height: 40px;
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 10px;
+}
+.blogs-left li{
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    text-align: center;
+}
+.blogs-left li:first-child{
+    padding-top: 0;
+}
+.blogs-left li:last-child{
+    border:none;
+    margin-bottom: 10px;
+}
+.blogs-left li a{
+    display: block;
+}
+.blogs-left li:hover a{
+    color: #999;
+}
+.blogs-left .buttom p{
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+    color: #999;
+}
+
+
+.blogs-right>div {
+    margin-bottom: 15px;
+}
+.blogs-right ul{
+    padding: 20px;
+    font-size: 14px;
+}
+.blogs-right ul li:hover a{
+    color: #999;
+}
+.blogs-right ul li{
+    padding-top:10px;
+}
+.blogs-right ul li:first-child{
+    padding-top: 0;
+}
+.right-recent{
+    margin-bottom: 15px;
+}
+.right-tag .tag{
+    padding: 20px;
+}
+.right-tag .tag span{
+    font-size: 12px;
+    display: inline-block;
+    border: 1px solid #eee;
+    line-height: 20px;
+    padding: 0 10px;
+    margin: 0 10px 3px 0;
+}

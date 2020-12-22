@@ -1,0 +1,87 @@
+*{
+    margin:0;
+    padding:0;
+}
+ul{
+    list-style:none;
+}
+input{
+    /*去除表单选中时的篮框*/
+    outline:none;
+}
+
+.clear:after,.clear:before{
+    height: 0;
+    content: ".";
+    display: block;
+    overflow: hidden;
+    clear: both;
+}
+
+body{
+     background:url("images/login.jpg") no-repeat;
+     background-size: 1520px;
+ }
+.login-box{
+    width:500px;
+    height: 351px;
+    border:1px solid #009688;
+    position: absolute;
+    /*margin:0 auto;*/
+    top: 50%;
+    left: 50%;
+    margin-top: -175.5px;
+    margin-left: -250px;
+    background: hsla(0,0%,100%,.6);
+}
+/*.login-box2{*/
+/*    width:500px;*/
+/*    height:300px;*/
+/*    background:#fff;*/
+/*    opacity:0.5;*/
+/*    position: absolute;*/
+/*    z-index: -1;*/
+/*    left:50%;*/
+/*    margin-left: -250px;*/
+/*}*/
+.login-title{
+    font-size:24px;
+    color:#393D49;
+    margin:62px 0 10px 0;
+}
+.login-input{
+    margin-bottom: 10px;
+}
+.login-input input{
+    width:232px;
+    text-align:center;
+}
+.login-input input,.login-submit input,.login-input-verify input{
+    border-radius: 5px;
+    height:38px;
+    border:none;
+}
+.login-title,.login-input,.login-submit{
+    text-align:center;
+}
+.login-submit input{
+    width:200px;
+    background: #1E9FFF;
+}
+.login-submit input:hover{
+    background: #01AAED;
+}
+.login-input-verify{
+    width:232px;
+    margin:10px auto;
+}
+.login-input-verify input{
+    width:115px;
+    text-align: center;
+}
+.login-input-verify img{
+    width: 100px;
+    height: 38px;
+    float: right;
+}
+

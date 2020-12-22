@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{../layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{../editor/css/editormd.css}"/>
+    <style>
+        .clear:after{
+            content:".";
+            height: 0;
+            overflow:hidden;
+            display:block;
+            clear:both;
+        }
+        .clear{
+            zoom: 1;
+        }
+        .layui-form-label{
+            /*width: 100%;*/
+            padding: 10px 0;
+            text-align: left;
+        }
+        .layui-input-block{
+            margin-left: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layui-layout layui-layout-admin">
+        <div>
+            <div class="clear" style="padding: 20px;">
+                <div class="layui-form" style="width:500px;float: left;">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">菜单标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" required  lay-verify="required" placeholder="请输入菜单标题" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">父ID</label>
+                        <div class="layui-input-block">
+                            <input type="hidden" id="pid" disabled name="pid" autocomplete="off" class="layui-input">
+                            <input type="text" id="ptitle" disabled required lay-verify="required" placeholder="请选择父菜单" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">菜单图标</label>
+                        <div class="layui-input-block">
+                            <select name="icon">
+                                <option></option>
+                                <option value="layui-icon-heart-fill"><i class="layui-icon layui-icon-heart-fill"></i></option>
+                                <option value="layui-icon-heart" ><i class="layui-icon layui-icon-heart"></i></option>
+                                <option value="layui-icon-light"><i class="layui-icon layui-icon-light"></i></option>
+                                <option value="layui-icon-time"><i class="layui-icon layui-icon-time"></i></option>
+                                <option value="layui-icon-bluetooth"><i class="layui-icon layui-icon-bluetooth"></i></option>
+                                <option value="layui-icon-at"><i class="layui-icon layui-icon-at"></i></option>
+                                <option value="layui-icon-mute"><i class="layui-icon layui-icon-mute"></i></option>
+                                <option value="layui-icon-mike"><i class="layui-icon layui-icon-mike"></i></option>
+                                <option value="layui-icon-key"><i class="layui-icon layui-icon-key"></i></option>
+                                <option value="layui-icon-gift"><i class="layui-icon layui-icon-gift"></i></option>
+                                <option value="layui-icon-email"><i class="layui-icon layui-icon-email"></i></option>
+                                <option value="layui-icon-rss"><i class="layui-icon layui-icon-rss"></i></option>
+                                <option value="layui-icon-wifi"><i class="layui-icon layui-icon-wifi"></i></option>
+                                <option value="layui-icon-logout"><i class="layui-icon layui-icon-logout"></i></option>
+                                <option value="layui-icon-android"><i class="layui-icon layui-icon-android"></i></option>
+                                <option value="layui-icon-ios"><i class="layui-icon layui-icon-ios"></i></option>
+                                <option value="layui-icon-windows"><i class="layui-icon layui-icon-windows"></i></option>
+                                <option value="layui-icon-transfer"><i class="layui-icon layui-icon-transfer"></i></option>
+                                <option value="layui-icon-service"><i class="layui-icon-service"></i></option>
+                                <option value="layui-icon-subtraction"><i class="layui-icon layui-icon-subtraction"></i></option>
+                                <option value="layui-icon-addition"><i class="layui-icon layui-icon-addition"></i></option>
+                                <option value="layui-icon-slider"><i class="layui-icon layui-icon-slider"></i></option>
+                                <option value="layui-icon-print"><i class="layui-icon layui-icon-print"></i></option>
+                                <option value="layui-icon-export"><i class="layui-icon layui-icon-export"></i></option>
+                                <option value="layui-icon-cols"><i class="layui-icon layui-icon-cols"></i></option>
+                                <option value="layui-icon-screen-restore"><i class="layui-icon layui-icon-screen-restore"></i></option>
+                                <option value="layui-icon-screen-full"><i class="layui-icon layui-icon-screen-full"></i></option>
+                                <option value="layui-icon-rate-half"><i class="layui-icon layui-icon-rate-half"></i></option>
+                                <option value="layui-icon-rate"><i class="layui-icon layui-icon-rate"></i></option>
+                                <option value="layui-icon-rate-solid"><i class="layui-icon layui-icon-rate-solid"></i></option>
+                                <option value="layui-icon-cellphone"><i class="layui-icon layui-icon-cellphone"></i></option>
+                                <option value="layui-icon-vercode"><i class="layui-icon layui-icon-vercode"></i></option>
+                                <option value="layui-icon-login-wechat"><i class="layui-icon layui-icon-login-wechat"></i></option>
+                                <option value="layui-icon-login-qq"><i class="layui-icon layui-icon-login-qq"></i></option>
+                                <option value="layui-icon-login-weibo"><i class="layui-icon layui-icon-login-weibo"></i></option>
+                                <option value="layui-icon-password"><i class="layui-icon layui-icon-password"></i></option>
+                                <option value="layui-icon-username"><i class="layui-icon layui-icon-username"></i></option>
+                                <option value="layui-icon-refresh-3"><i class="layui-icon layui-icon-refresh-3"></i></option>
+                                <option value="layui-icon-auz"><i class="layui-icon layui-icon-auz"></i></option>
+                                <option value="layui-icon-spread-left"><i class="layui-icon layui-icon-spread-left"></i></option>
+                                <option value="layui-icon-shrink-right"><i class="layui-icon layui-icon-shrink-right"></i></option>
+                                <option value="layui-icon-snowflake"><i class="layui-icon layui-icon-snowflake"></i></option>
+                                <option value="layui-icon-tips"><i class="layui-icon layui-icon-tips"></i></option>
+                                <option value="layui-icon-note"><i class="layui-icon layui-icon-note"></i></option>
+                                <option value="layui-icon-home"><i class="layui-icon layui-icon-home"></i></option>
+                                <option value="layui-icon-senior"><i class="layui-icon layui-icon-senior"></i></option>
+                                <option value="layui-icon-refresh"><i class="layui-icon layui-icon-refresh"></i></option>
+                                <option value="layui-icon-refresh-1"><i class="layui-icon layui-icon-refresh-1"></i></option>
+                                <option value="layui-icon-flag"><i class="layui-icon layui-icon-flag"></i></option>
+                                <option value="layui-icon-theme"><i class="layui-icon layui-icon-theme"></i></option>
+                                <option value="layui-icon-notice"><i class="layui-icon layui-icon-notice"></i></option>
+                                <option value="layui-icon-website"><i class="layui-icon layui-icon-website"></i></option>
+                                <option value="layui-icon-console"><i class="layui-icon layui-icon-console"></i></option>
+                                <option value="layui-icon-face-surprised"><i class="layui-icon layui-icon-face-surprised"></i></option>
+                                <option value="layui-icon-set"><i class="layui-icon layui-icon-set"></i></option>
+                                <option value="layui-icon-template-1"><i class="layui-icon ayui-icon-template-1"></i></option>
+                                <option value="layui-icon-app"><i class="layui-icon layui-icon-app"></i></option>
+                                <option value="layui-icon-template"><i class="layui-icon layui-icon-template"></i></option>
+                                <option value="layui-icon-praise"><i class="layui-icon layui-icon-praise"></i></option>
+                                <option value="layui-icon-tread"><i class="layui-icon layui-icon-tread"></i></option>
+                                <option value="layui-icon-male"><i class="layui-icon layui-icon-male"></i></option>
+                                <option value="layui-icon-female"><i class="layui-icon layui-icon-female"></i></option>
+                                <option value="layui-icon-camera"><i class="layui-icon layui-icon-camera"></i></option>
+                                <option value="layui-icon-camera-fill"><i class="layui-icon layui-icon-camera-fill"></i></option>
+                                <option value="layui-icon-more"><i class="layui-icon layui-icon-more"></i></option>
+                                <option value="layui-icon-more-vertical"><i class="layui-icon layui-icon-more-vertical"></i></option>
+                                <option value="layui-icon-rmb"><i class="layui-icon layui-icon-rmb"></i></option>
+                                <option value="layui-icon-dollar"><i class="layui-icon layui-icon-dollar"></i></option>
+                                <option value="layui-icon-diamond"><i class="layui-icon layui-icon-diamond"></i></option>
+                                <option value="layui-icon-fire"><i class="layui-icon layui-icon-fire"></i></option>
+                                <option value="layui-icon-return"><i class="layui-icon layui-icon-return"></i></option>
+                                <option value="layui-icon-location"><i class="layui-icon layui-icon-location"></i></option>
+                                <option value="layui-icon-read"><i class="layui-icon layui-icon-read"></i></option>
+                                <option value="layui-icon-survey"><i class="layui-icon layui-icon-survey"></i></option>
+                                <option value="layui-icon-face-smile"><i class="layui-icon layui-icon-face-smile"></i></option>
+                                <option value="layui-icon-face-cry"><i class="layui-icon layui-icon-face-cry"></i></option>
+                                <option value="layui-icon-cart-simple"><i class="layui-icon layui-icon-cart-simple"></i></option>
+                                <option value="layui-icon-cart"><i class="layui-icon layui-icon-cart"></i></option>
+                                <option value="layui-icon-next"><i class="layui-icon layui-icon-next"></i></option>
+                                <option value="layui-icon-prev"><i class="layui-icon layui-icon-prev"></i></option>
+                                <option value="layui-icon-upload-drag"><i class="layui-icon layui-icon-upload-drag"></i></option>
+                                <option value="layui-icon-upload"><i class="layui-icon layui-icon-upload"></i></option>
+                                <option value="layui-icon-download-circle"><i class="layui-icon layui-icon-download-circle"></i></option>
+                                <option value="layui-icon-component"><i class="layui-icon layui-icon-component"></i></option>
+                                <option value="layui-icon-file-b"><i class="layui-icon layui-icon-file-b"></i></option>
+                                <option value="layui-icon-user"><i class="layui-icon layui-icon-user"></i></option>
+                                <option value="layui-icon-find-fill"><i class="layui-icon layui-icon-find-fill"></i></option>
+                                <option value="layui-icon-loading"><i class="layui-icon layui-icon-loading"></i></option>
+                                <option value="layui-icon-loading-1"><i class="layui-icon layui-icon-loading-1"></i></option>
+                                <option value="layui-icon-add-1"><i class="layui-icon layui-icon-add-1"></i></option>
+                                <option value="layui-icon-play"><i class="layui-icon layui-icon-play"></i></option>
+                                <option value="layui-icon-pause"><i class="layui-icon layui-icon-pause"></i></option>
+                                <option value="layui-icon-headset"><i class="layui-icon layui-icon-headset"></i></option>
+                                <option value="layui-icon-video"><i class="layui-icon layui-icon-video"></i></option>
+                                <option value="layui-icon-voice"><i class="layui-icon layui-icon-voice"></i></option>
+                                <option value="layui-icon-speaker"><i class="layui-icon layui-icon-speaker"></i></option>
+                                <option value="layui-icon-fonts-del"><i class="layui-icon layui-icon-fonts-del"></i></option>
+                                <option value="layui-icon-fonts-code"><i class="layui-icon layui-icon-fonts-code"></i></option>
+                                <option value="layui-icon-fonts-html"><i class="layui-icon layui-icon-fonts-html"></i></option>
+                                <option value="layui-icon-fonts-strong"><i class="layui-icon layui-icon-fonts-strong"></i></option>
+                                <option value="layui-icon-unlink"><i class="layui-icon layui-icon-unlink"></i></option>
+                                <option value="layui-icon-picture"><i class="layui-icon layui-icon-picture"></i></option>
+                                <option value="layui-icon-link"><i class="layui-icon layui-icon-link"></i></option>
+                                <option value="layui-icon-face-smile-b"><i class="layui-icon layui-icon-face-smile-b"></i></option>
+                                <option value="layui-icon-align-left"><i class="layui-icon layui-icon-align-left"></i></option>
+                                <option value="layui-icon-align-right"><i class="layui-icon layui-icon-align-right"></i></option>
+                                <option value="layui-icon-align-center"><i class="layui-icon layui-icon-align-center"></i></option>
+                                <option value="layui-icon-fonts-u"><i class="layui-icon layui-icon-fonts-u"></i></option>
+                                <option value="layui-icon-fonts-i"><i class="layui-icon layui-icon-fonts-i"></i></option>
+                                <option value="layui-icon-tabs"><i class="layui-icon layui-icon-tabs"></i></option>
+                                <option value="layui-icon-radio"><i class="layui-icon layui-icon-radio"></i></option>
+                                <option value="layui-icon-circle"><i class="layui-icon layui-icon-circle"></i></option>
+                                <option value="layui-icon-edit"><i class="layui-icon layui-icon-edit"></i></option>
+                                <option value="layui-icon-share"><i class="layui-icon layui-icon-share"></i></option>
+                                <option value="layui-icon-delete"><i class="layui-icon layui-icon-delete"></i></option>
+                                <option value="layui-icon-form"><i class="layui-icon layui-icon-form"></i></option>
+                                <option value="layui-icon-cellphone-fine"><i class="layui-icon layui-icon-cellphone-fine"></i></option>
+                                <option value="layui-icon-dialogue"><i class="layui-icon layui-icon-dialogue"></i></option>
+                                <option value="layui-icon-fonts-clear"><i class="layui-icon layui-icon-fonts-clear"></i></option>
+                                <option value="layui-icon-layer"><i class="layui-icon layui-icon-layer"></i></option>
+                                <option value="layui-icon-date"><i class="layui-icon layui-icon-date"></i></option>
+                                <option value="layui-icon-water"><i class="layui-icon layui-icon-water"></i></option>
+                                <option value="layui-icon-code-circle"><i class="layui-icon layui-icon-code-circle"></i></option>
+                                <option value="layui-icon-list"><i class="layui-icon layui-icon-list"></i></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">菜单链接</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="url" required  lay-verify="required" placeholder="请输入菜单url" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div style="margin-left: 1140px;float: right;">
+                        <button type="button" class="layui-btn" lay-submit lay-filter="sub">添加菜单</button>
+                    </div>
+                </div>
+                <div id="test1" style="float: left;margin-left: 10px;"></div>
+            </div>
+        </div>
+    </div>
+<script th:src="@{../layui/layui.js}"></script>
+<script th:src="@{../js/jq.js}"></script>
+
+<script th:src="@{../editor/editormd.js}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        layui.use(['form','element','layer','tree'], function() {
+            var element = layui.element;
+            var from = layui.form;
+            var layer=layui.layer;
+            var tree=layui.tree;
+
+            $.ajax({
+                url: '/finall',
+                type: 'post',
+                success: function (data) {
+                    if (!data.code > 0) {
+                        tree.render({
+                            elem: '#test1'  //绑定元素
+                            ,data: data.obj
+                            ,accordion: true
+                            ,click: function(obj){
+                                console.log(obj.data); //得到当前点击的节点数据
+                                console.log(obj.state); //得到当前节点的展开状态：open、close、normal
+                                console.log(obj.elem); //得到当前节点元素
+                                console.log(obj.data.children); //当前节点下是否有子节点
+
+                                $("#pid").val(obj.data.id);
+                                $("#ptitle").val(obj.data.title);
+                            }
+                        });
+                    }
+                }
+            });
+
+            //渲染
+            // var inst1 =
+
+            from.on('submit(sub)', function(data){
+                console.log(data.field)
+                $.ajax({
+                    url:"/menuAdd",
+                    type:'post',
+                    data:data.field,
+                    success:function(data){
+                        if(!data.code>0){
+                            layer.msg("添加成功");
+                            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                            parent.layui.table.reload('menu');
+                            parent.layer.close(index);
+                        }else{
+                            layer.msg("添加失败")
+                        }
+                    }
+                });
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+    });
+</script>
+</body>
+</html>

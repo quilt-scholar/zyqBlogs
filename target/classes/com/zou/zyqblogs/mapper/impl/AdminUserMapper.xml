@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zou.zyqblogs.mapper.AdminUserMapper">
+    <!--登入功能，查询用户传递过来的测试是否与数据库信息匹配-->
+    <select id="queryAdminUserByUser" parameterType="AdminUser" resultType="AdminUser">
+        select * from tb_admin_user where
+        login_user_name=#{loginUserName} and login_password=#{loginPassword}
+    </select>
+
+    <!--修改用户表信息-->
+    <update id="updAdminUser" parameterType="map">
+        update tb_admin_user
+        <set>
+            <foreach collection="maps" index="key" item="val">
+                <if test="val!=null and val!='' and key!='tableName' and key!='admin_user_id'">
+                    ${key}=#{val},
+                </if>
+            </foreach>
+        </set>
+        <where>
+            admin_user_id=#{maps.admin_user_id}
+        </where>
+    </update>
+    <!--
+    <update id="updAdminUser" parameterType="map">
+        update tb_admin_user
+        <set>
+            通过使用遍历传递过来的数据，因为我是使用map传递数据的如果要遍历key字段，
+            就需要将在接口中参数上使用@Param("maps")，详情请看：https://blog.csdn.net/zzhongcy/article/details/102659104
+            <foreach collection="maps" index="key" item="val"> key代表map中的健值，val代表map中的值
+                判断val是否为空，并排除admin_user_id
+                <if test="val!=null and val!='' and key!='tableName' and key!='admin_user_id'">
+                    ${key}=#{val},
+                </if>
+            </foreach>
+        </set>
+        <where>
+            admin_user_id=#{maps.admin_user_id}
+        </where>
+    </update>
+    -->
+</mapper>

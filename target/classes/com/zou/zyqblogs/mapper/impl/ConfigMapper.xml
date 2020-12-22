@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zou.zyqblogs.mapper.ConfigMapper">
+    <!--根据配置名称查询数据-->
+    <select id="finallByConfigName" parameterType="String" resultType="map">
+        select * from tb_config where config_name=#{config_name}
+    </select>
+
+    <!--修改配置信息-->
+    <update id="updWebsite" parameterType="map">
+        update tb_config
+        <set>
+            <foreach collection="maps" index="key" item="val">
+                <if test="val!=null and val!='' and key!='config_name'">
+                    ${key}=#{val},
+                </if>
+            </foreach>
+        </set>
+        <where>
+            config_name=#{maps.config_name}
+        </where>
+    </update>
+</mapper>
