@@ -1,1 +1,27 @@
+*.class
+*.log
+*.lock
+target/
+
+# package files .
+*.jar
+*.war
+*.ear
+
+# idea
+.idea/
+
+*.iws
+.idea
+.classpath
+.project
+.settings/
+
+# IDEA
 *.iml
+*.ipr
+bin/
+
+tmp/
+
+.gitignore
