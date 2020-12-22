@@ -12,7 +12,7 @@ target/
 .idea/
 
 *.iws
-/.idea
+.idea
 .classpath
 .project
 .settings/
