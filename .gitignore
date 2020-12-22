@@ -2,6 +2,7 @@
 *.log
 *.lock
 
+# package files
 *.jar
 *.war
 *.ear
@@ -11,6 +12,7 @@ target/
 .idea/
 *.iml
 
+# IDEA
 *.iml
 *.ipr
 *.iws
